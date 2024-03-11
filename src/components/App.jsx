@@ -10,6 +10,7 @@ import ImageModal from './ImageModal';
 
 
 
+
 const App = () => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -17,7 +18,8 @@ const App = () => {
     const [page, setPage] = useState(1);
     const [hasMoreImages, setHasMoreImages] = useState(true);
     const [query, setQuery] = useState('');
-    const [modalIsOpen, setIsOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+
 
 
    async function fetchImages(query, pageNum) {
@@ -76,21 +78,27 @@ const App = () => {
         fetchImages(query, page + 1);
         setPage(page + 1);
     };
- function openModal() {
-    setIsOpen(true);
-  }
-    function closeModal() {
-    setIsOpen(false);
-  }
-
+    const handleImageClick = (images) => {
+        setSelectedImage(images);
+        console.log("test");
+};
+  const closeModal = () => {
+      setSelectedImage(null);
+  };
     return (
         <div>
             <SearchBar onSubmit={handleSearch} />
             {loading && <Loader />}
             {error && <ErrorMessage message={error} />}
-            {images.length > 0 && <ImageGallery images={images}  onClick={openModal} />}
+            {images.length > 0 && <ImageGallery images={images} onClick={handleImageClick} />}
             {hasMoreImages && images.length > 0 && <LoadMoreBtn onClick={loadMore} />}
-   
+            {selectedImage && (
+                <ImageModal
+          images={selectedImage}
+          isOpen={selectedImage !== null}
+          onRequestClose={closeModal}
+        />
+      )}
         </div>
     );
 };

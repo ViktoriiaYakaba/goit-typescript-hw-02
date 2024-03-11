@@ -1,6 +1,10 @@
 import Modal from 'react-modal';
 
+
 const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
   content: {
     top: '50%',
     left: '50%',
@@ -8,35 +12,29 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+     backgroundColor: 'transparent',
+    border: 'none',
   },
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#root')
 
-const ImageModal = ({ image, setIsOpen, modalIsOpen }) => {
-  // Funzione per chiudere il modal solo se non si è cliccato sull'immagine
-  function closeModal() {
-    if (!image) {
-      setIsOpen(false);
-    }
-  }
 
-  // Funzione per chiudere il modal quando si clicca sull'immagine
-  function handleImageClick() {
-    closeModal();
-  }
+const ImageModal = ({ images, isOpen, onRequestClose}) => {
+ 
+ const afterOpenModal = () => {
+  };
 
   return (
-    <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        {/* Aggiungi un gestore di eventi onClick per l'immagine */}
-        <img src={image.regular} alt={image.alt} onClick={handleImageClick} />{' '}
-      </Modal>
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onAfterOpen={afterOpenModal}
+      onRequestClose={onRequestClose}
+      style={customStyles}
+      ariaHideApp={false}
+    >
+      <img src={images.regular} alt={images.alt} />
+    </Modal>
   );
 };
 
