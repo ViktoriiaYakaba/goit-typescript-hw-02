@@ -90,10 +90,7 @@ const App = () => {
             {error && <ErrorMessage message={error} />}
             {images.length > 0 && <ImageGallery images={images}  onClick={openModal} />}
             {hasMoreImages && images.length > 0 && <LoadMoreBtn onClick={loadMore} />}
-        <ImageModal
-  isOpen={modalIsOpen}
-  onRequestClose={closeModal}
-/>
+   
         </div>
     );
 };
