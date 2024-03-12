@@ -18,6 +18,7 @@ const App = () => {
     const [page, setPage] = useState(1);
     const [hasMoreImages, setHasMoreImages] = useState(true);
     const [query, setQuery] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
 
 
@@ -78,12 +79,17 @@ const App = () => {
         fetchImages(query, page + 1);
         setPage(page + 1);
     };
-    const handleImageClick = (images) => {
-        setSelectedImage(images);
-        console.log("test");
+    
+  const handleImageClick = (image) => {
+        setSelectedImage(image);
+      setIsModalOpen(true);
+      console.log(isModalOpen)
+    
 };
   const closeModal = () => {
       setSelectedImage(null);
+      setIsModalOpen(false);
+
   };
     return (
         <div>
@@ -95,7 +101,7 @@ const App = () => {
             {selectedImage && (
                 <ImageModal
           images={selectedImage}
-          isOpen={selectedImage !== null}
+          isOpen={isModalOpen}
           onRequestClose={closeModal}
         />
       )}

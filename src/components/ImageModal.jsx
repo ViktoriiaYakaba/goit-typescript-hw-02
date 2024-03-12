@@ -1,6 +1,7 @@
 import Modal from 'react-modal';
 
 
+
 const customStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -17,18 +18,15 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 
-const ImageModal = ({ images, isOpen, onRequestClose}) => {
+const ImageModal = ({ images, isOpen, onRequestClose }) => {
  
- const afterOpenModal = () => {
-  };
 
   return (
     <Modal
       isOpen={isOpen}
-      onAfterOpen={afterOpenModal}
       onRequestClose={onRequestClose}
       style={customStyles}
       ariaHideApp={false}
