@@ -67,13 +67,12 @@ const App = () => {
             setImages([]);
             setHasMoreImages(true);
         }
-    }, [query]);
-
-    useEffect(() => {
         if (page > 1) {
             fetchImages(query, page);
         }
-    }, [page]);
+    }, [query,page]);
+
+    
 
     const handleSearch = (query) => {
         setQuery(query);
