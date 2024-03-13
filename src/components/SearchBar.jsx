@@ -22,7 +22,7 @@ const SearchBar = ({ onSubmit }) => {
 
     return (
         <header className={css.header}>
-            <form className={css.form}>
+            <form className={css.form} onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="Search images and photos..."
@@ -30,7 +30,7 @@ const SearchBar = ({ onSubmit }) => {
                     onChange={(e) => setQuery(e.target.value)}
                     className={css.input}
                 />
-                <button type="submit" className={css.btn} onClick={handleSubmit}><GoSearch size={20} /></button>
+                <button type="submit" className={css.btn}><GoSearch size={20} /></button>
             </form>
             <Toaster position="top-right" />
         </header>
