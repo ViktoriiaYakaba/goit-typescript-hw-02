@@ -1,19 +1,17 @@
 import { FC } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
+import ClipLoader from "react-spinners/ClipLoader";
 import styles from './Loader.module.css'; 
 
 const Loader: FC = () => {
     return (
         <div className={styles.loaderStyle}>
-            <RotatingLines
-                visible={true}
-                height={50}
-                width={50}
-                color="gray"
-                strokeWidth={5}
-                animationDuration={0.75}
-                ariaLabel="rotating-lines-loading"
-            />
+           <ClipLoader
+        color='SlateBlue'
+        loading={true}
+        size={100}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
         </div>
     );
 };
