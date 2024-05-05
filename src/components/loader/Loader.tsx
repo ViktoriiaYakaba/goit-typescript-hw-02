@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import styles from './Loader.module.css'; 
 
@@ -19,4 +19,6 @@ const Loader: FC = () => {
 };
 
 export default Loader;
+
+
 
