@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import SearchBar from './SearchBar';
-import ImageGallery from './ImageGallery';
-import Loader from './Loader';
-import ErrorMessage from './ErrorMessage';
-import LoadMoreBtn from './LoadMoreBtn';
-import ImageModal from './ImageModal';
+import SearchBar from '../searchBar/SearchBar';
+import ImageGallery from '../imageGallery/ImageGallery';
+import Loader from '../loader/Loader';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn';
+import ImageModal from '../imageModal/ImageModal';
+import { Image} from './App.type';
 
 const App = () => {
-    const [images, setImages] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-    const [page, setPage] = useState(1);
-    const [hasMoreImages, setHasMoreImages] = useState(true);
+    const [images, setImages] = useState<Image[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+    const [page, setPage] = useState<number>(1);
+    const [hasMoreImages, setHasMoreImages] = useState<boolean>(true);
     const [query, setQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
 
-    async function fetchImages(query, pageNum) {
+    async function fetchImages(query: string, pageNum: number): Promise<void> {
         try {
             setLoading(true);
             const apiKey = 'wmfnsVc_DdNJUYvLvziU9AjLz2nPehfwjBFjdxGMITc';
@@ -35,7 +36,7 @@ const App = () => {
                     Authorization: `Client-ID ${apiKey}`
                 }
             });
-            const normalizeData = response.data.results.map(({ alt_description, id, urls }) => ({
+            const normalizeData: Image[] = response.data.results.map(({ alt_description, id, urls }: any) => ({
                 alt: alt_description,
                 id,
                 small: urls.small,
@@ -74,20 +75,20 @@ const App = () => {
 
     
 
-    const handleSearch = (query) => {
+    const handleSearch = (query: string): void => {
         setQuery(query);
     };
 
-    const loadMore = () => {
+    const loadMore = (): void => {
         setPage(page + 1);
     };
 
-    const handleImageClick = (image) => {
+    const handleImageClick = (image: Image): void => {
         setSelectedImage(image);
         setIsModalOpen(true);
     };
 
-    const closeModal = () => {
+    const closeModal = (): void => {
         setSelectedImage(null);
         setIsModalOpen(false);
     };
