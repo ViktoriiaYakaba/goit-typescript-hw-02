@@ -14,8 +14,8 @@ const App = () => {
     const [error, setError] = useState<string>('');
     const [page, setPage] = useState<number>(1);
     const [hasMoreImages, setHasMoreImages] = useState<boolean>(true);
-    const [query, setQuery] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [query, setQuery] = useState<string>('');
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
 

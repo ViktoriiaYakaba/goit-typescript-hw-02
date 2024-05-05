@@ -1,9 +1,9 @@
-
+import { FC } from 'react';
 interface ErrorMessageProps {
     message: string;
 }
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
     const errorStyle = {
         margin: "auto",
     };
