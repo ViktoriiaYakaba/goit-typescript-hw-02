@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect, FC } from 'react';
+import axios, {AxiosResponse} from 'axios';
 import SearchBar from '../searchBar/SearchBar';
 import ImageGallery from '../imageGallery/ImageGallery';
 import Loader from '../loader/Loader';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn';
 import ImageModal from '../imageModal/ImageModal';
-import { Image} from './App.type';
+import { Image, UnsplashImage } from './App.type';
 
-const App = () => {
+const App: FC = () => {
     const [images, setImages] = useState<Image[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
@@ -22,15 +22,15 @@ const App = () => {
     async function fetchImages(query: string, pageNum: number): Promise<void> {
         try {
             setLoading(true);
-            const apiKey = 'wmfnsVc_DdNJUYvLvziU9AjLz2nPehfwjBFjdxGMITc';
-            const params = {
+            const apiKey: string = 'wmfnsVc_DdNJUYvLvziU9AjLz2nPehfwjBFjdxGMITc';
+            const params: UnsplashImage = {
                 client_id: apiKey,
                 query: query,
                 orientation: 'landscape',
                 page: pageNum,
                 per_page: 12,
             };
-            const response = await axios.get(`https://api.unsplash.com/search/photos/`, {
+            const response: AxiosResponse<any> = await axios.get<UnsplashImage, AxiosResponse<any>>(`https://api.unsplash.com/search/photos/`, {
                 params: params,
                 headers: {
                     Authorization: `Client-ID ${apiKey}`
